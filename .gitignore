@@ -1,0 +1,41 @@
+# Environnements virtuels
+venv/
+.env/
+.venv/
+
+# Fichiers Python compilés
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Bases de données locales
+db.sqlite3
+
+# Fichiers de logs
+*.log
+
+# Paramètres sensibles
+*.env
+
+# Fichiers de migration inutiles (facultatif selon ton équipe)
+# (en général on versionne les migrations, donc on ne met PAS ce filtre.)
+
+# Dossiers de cache / de build
+*.egg-info/
+dist/
+build/
+
+# Système d'exploitation
+.DS_Store  # (macOS)
+Thumbs.db  # (Windows)
+
+# Node.js (si tu as du frontend avec npm ou yarn)
+node_modules/
+
+# Docker
+*.pid
+docker-compose.override.yml
+
+# VS Code (ou autres éditeurs)
+.vscode/
+.idea/
