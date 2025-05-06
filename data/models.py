@@ -46,6 +46,7 @@ class Entraineur(models.Model):
 
 
 class Equipe(models.Model):
+    id_Eq = models.IntegerField(primary_key=True)
     nom = models.CharField(max_length=100)
     stade = models.CharField(max_length=100)
     entraineur = models.OneToOneField(Entraineur, on_delete=models.CASCADE)
