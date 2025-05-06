@@ -3,7 +3,7 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from data.services import process_webhook_payload
+from data.handlers import process_webhook_payload
 
 
 @csrf_exempt

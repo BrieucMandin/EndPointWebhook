@@ -1,40 +1,6 @@
-import json
-import requests
+from data.models import Joueur,Entraineur,Equipe
 
-from .models import Joueur,Entraineur,Equipe
-
-def process_webhook_payload(payload):
-    type_objet = payload.get("type")
-    action = payload.get("action")
-    id_objet = payload.get("id")
-
-    print("🔔 Webhook reçu :")
-    print(json.dumps(payload, indent=4))
-
-    
-    try:
-        if action == "delete":
-            delete_in_base(id_objet,type_objet)
-        elif action == "update":
-            endpoint = get_endpoint(id_objet,type_objet,payload)
-            print(endpoint)
-            response = requests.get(endpoint, json=payload)
-            print("🔔 Réponse API reçu :")
-            data = response.json()
-            print(json.dumps(data, indent=7))
-            ajout_element_en_base(data,type_objet)
-            if response.status_code==200:
-                print(f" Appel API vers {endpoint} — Code {response.status_code} ✅")
-            else:
-                print(f" Appel API vers {endpoint} — Code {response.status_code} ❌")
-        else:
-            print("❓ Action non reconnue")
-            return
-    except requests.RequestException as e:
-        print(f"❌ Erreur API : {e}")
-
-
-def ajout_element_en_base(data,type_data):
+def update_or_create_object(data,type_data):
     
     if type_data=="joueur":
         try:
@@ -70,9 +36,6 @@ def ajout_element_en_base(data,type_data):
             )
             print("✅ Joueur ajouté dans la base locale")
     
-
-
-
     elif type_data=="entraineur":
         try:
             entraineur = Entraineur.objects.get(id_En=data["id_En"])
@@ -129,7 +92,7 @@ def ajout_element_en_base(data,type_data):
 
 
 def delete_in_base(id_object,type_data):
-        
+
         if type_data=="joueur":
             Joueur.objects.filter(id_J=id_object).delete()
             print("✅ Joueur supprimé dans la base locale")
@@ -139,23 +102,3 @@ def delete_in_base(id_object,type_data):
         elif type_data=="equipe":
             Equipe.objects.filter(id_Eq=id_object).delete()
             print("✅ Equipe supprimé dans la base locale")
-
-
-def get_endpoint(id_objet,type_objet,payload):
-    base_url = "http://127.0.0.1:8000"
-
-    nom = payload.get("nom")
-
-    endpoint_map = {
-        "joueur": f"{base_url}/joueurs/{id_objet}/",
-        "entraineur": f"{base_url}/entraineurs/{id_objet}/",
-        "equipe": f"{base_url}/equipes/{id_objet}/"
-    }
-
-    endpoint = endpoint_map.get(type_objet)
-    if not endpoint:
-        print("❓ Type non reconnu")
-        return
- 
-    return endpoint
-    
