@@ -7,7 +7,7 @@ def get_endpoint(type_objet, id_objet):
     endpoint_map = {
         "joueur": f"{base_url}/joueurs/{id_objet}/",
         "entraineur": f"{base_url}/entraineurs/{id_objet}/",
-        "equipe": f"{base_url}/equipes/{id_objet}/"
+        "equipe": f"{base_url}/equipes/{id_objet}/",
     }
 
     return endpoint_map.get(type_objet)

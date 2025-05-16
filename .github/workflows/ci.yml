@@ -1,0 +1,44 @@
+name: CI - Django Webhook Endpoint
+
+on:
+  push:
+    branches:
+      - '**'
+      - '!master'
+      - '!validation'
+      - '!integration'
+
+env:
+  run_id: ${{ github.run_id }}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci-push:
+    runs-on: self-hosted
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Compose
+        run: docker-compose -f docker-compose.yml up -d --build
+
+      # - name: Install requirements
+      #   run: docker exec --tty $(docker-compose ps -q endpoint-app) bash -lc "pip install -r requirements.txt"
+
+      - name: Check Black formatting
+        run: docker exec --tty $(docker-compose ps -q endpoint-app) bash -lc "black . --check --diff --color --line-length=120 --extend-exclude '^.*\\b(migrations)\\b.*$'"
+
+      - name: Run unit tests
+        run: docker exec --tty $(docker-compose ps -q endpoint-app) bash -lc "coverage run manage.py test"
+
+      - name: Coverage report
+        run: docker exec --tty $(docker-compose ps -q endpoint-app) bash -lc "coverage report -m --fail-under=80"
+
+      - name: Tear down
+        run: docker-compose down -v --rmi all
+        if: success() || failure() || cancelled()

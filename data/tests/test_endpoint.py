@@ -4,6 +4,7 @@ from unittest.mock import patch
 
 from data.endpoints import get_endpoint
 
+
 class GetEndpointTestCase(unittest.TestCase):
 
     @patch("data.endpoints.settings")
@@ -32,6 +33,7 @@ class GetEndpointTestCase(unittest.TestCase):
         mock_settings.REMOTE_API_BASE_URL = "http://127.0.0.1:8000"
         result = get_endpoint("arbitre", 1)
         self.assertIsNone(result)
+
 
 if __name__ == "__main__":
     unittest.main()

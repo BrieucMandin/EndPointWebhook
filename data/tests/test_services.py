@@ -5,6 +5,7 @@ from django.test import TestCase
 from data.models import Joueur, Entraineur, Equipe
 from data.services import update_or_create_object, delete_in_base
 
+
 class ServicesTests(TestCase):
 
     def test_update_or_create_joueur_creation(self):
@@ -15,7 +16,7 @@ class ServicesTests(TestCase):
             "poste": "Attaquant",
             "nationalite": "Française",
             "pied_fort": "Droit",
-            "nombre_but": 150
+            "nombre_but": 150,
         }
 
         update_or_create_object(data, "joueur")
@@ -24,13 +25,7 @@ class ServicesTests(TestCase):
 
     def test_update_or_create_joueur_update(self):
         joueur = Joueur.objects.create(
-            id_J=2,
-            nom="Griezmann",
-            age=32,
-            poste="Milieu",
-            nationalite="Française",
-            pied_fort="Gauche",
-            nombre_but=90
+            id_J=2, nom="Griezmann", age=32, poste="Milieu", nationalite="Française", pied_fort="Gauche", nombre_but=90
         )
 
         data = {
@@ -40,7 +35,7 @@ class ServicesTests(TestCase):
             "poste": "Milieu",
             "nationalite": "Française",
             "pied_fort": "Gauche",
-            "nombre_but": 95
+            "nombre_but": 95,
         }
 
         update_or_create_object(data, "joueur")
@@ -49,17 +44,14 @@ class ServicesTests(TestCase):
         self.assertEqual(joueur.age, 33)
 
     def test_delete_joueur(self):
-        Joueur.objects.create(id_J=3, nom="Test", age=20, poste="Défenseur", nationalite="Brésilienne", pied_fort="Droit", nombre_but=1)
+        Joueur.objects.create(
+            id_J=3, nom="Test", age=20, poste="Défenseur", nationalite="Brésilienne", pied_fort="Droit", nombre_but=1
+        )
         delete_in_base(3, "joueur")
         self.assertEqual(Joueur.objects.filter(id_J=3).count(), 0)
 
     def test_update_or_create_entraineur(self):
-        data = {
-            "id_En": 1,
-            "nom": "Deschamps",
-            "experience": 10,
-            "nationalite": "Française"
-        }
+        data = {"id_En": 1, "nom": "Deschamps", "experience": 10, "nationalite": "Française"}
 
         update_or_create_object(data, "entraineur")
         entraineur = Entraineur.objects.get(id_En=1)
@@ -72,15 +64,19 @@ class ServicesTests(TestCase):
 
     def test_update_or_create_equipe(self):
         entraineur = Entraineur.objects.create(id_En=5, nom="Zidane", experience=12, nationalite="Française")
-        joueur1 = Joueur.objects.create(id_J=10, nom="Joueur 1", age=22, poste="Défenseur", nationalite="Portugaise", pied_fort="Gauche", nombre_but=2)
-        joueur2 = Joueur.objects.create(id_J=11, nom="Joueur 2", age=24, poste="Milieu", nationalite="Italienne", pied_fort="Droit", nombre_but=5)
+        joueur1 = Joueur.objects.create(
+            id_J=10, nom="Joueur 1", age=22, poste="Défenseur", nationalite="Portugaise", pied_fort="Gauche", nombre_but=2
+        )
+        joueur2 = Joueur.objects.create(
+            id_J=11, nom="Joueur 2", age=24, poste="Milieu", nationalite="Italienne", pied_fort="Droit", nombre_but=5
+        )
 
         data = {
             "id_Eq": 1,
             "nom": "PSG",
             "stade": "Parc des Princes",
             "entraineur": {"id_En": 5},
-            "joueurs": [{"id_J": 10}, {"id_J": 11}]
+            "joueurs": [{"id_J": 10}, {"id_J": 11}],
         }
 
         update_or_create_object(data, "equipe")

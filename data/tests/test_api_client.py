@@ -5,6 +5,7 @@ from unittest.mock import patch, Mock
 
 from data.api_client import fetch_data
 
+
 class FetchDataTests(TestCase):
 
     @patch("data.api_client.requests.get")

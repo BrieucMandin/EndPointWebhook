@@ -3,17 +3,13 @@ from django.db import models
 class Joueur(models.Model):
 
     POSTE_CHOICES = [
-        ('GK', 'Gardien'),
-        ('DEF', 'Défenseur'),
-        ('MID', 'Milieu'),
-        ('ATT', 'Attaquant'),
+        ("GK", "Gardien"),
+        ("DEF", "Défenseur"),
+        ("MID", "Milieu"),
+        ("ATT", "Attaquant"),
     ]
 
-    PIED_FORT_CHOICES =[
-        ("D", "Droit"),
-        ("G","Gauche"),
-        ("O","Ousmane Dembélé")
-    ]
+    PIED_FORT_CHOICES = [("D", "Droit"), ("G", "Gauche"), ("O", "Ousmane Dembélé")]
 
     id_J = models.IntegerField(primary_key=True)
     nom = models.CharField(max_length=100)
@@ -21,15 +17,12 @@ class Joueur(models.Model):
     poste = models.CharField(
         max_length=3,
         choices=POSTE_CHOICES,  # Appliquer les choix possibles
-        default='MID',  # Valeur par défaut
+        default="MID",  # Valeur par défaut
     )
     nationalite = models.CharField(max_length=50)
-    pied_fort = models.CharField(
-        max_length=1,
-        choices=PIED_FORT_CHOICES,
-        default="D"
-    )
-    nombre_but=models.IntegerField()
+    pied_fort = models.CharField(max_length=1, choices=PIED_FORT_CHOICES, default="D")
+    nombre_but = models.IntegerField()
+
 
     def __str__(self):
         return f"{self.nom} ({self.poste})"
