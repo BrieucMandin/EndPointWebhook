@@ -3,10 +3,6 @@ name: CI - Django Webhook Endpoint
 on:
   push:
     branches:
-      - '**'
-      - '!master'
-      - '!validation'
-      - '!integration'
 
 env:
   run_id: ${{ github.run_id }}
