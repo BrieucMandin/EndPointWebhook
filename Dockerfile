@@ -2,7 +2,7 @@
 FROM python:3.12-bookworm
 
 ENV TZ=Europe/Paris
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONUNBUFFERED=1
 
 # Définit le répertoire de travail dans le conteneur
 WORKDIR /srv/endpointwebhook
