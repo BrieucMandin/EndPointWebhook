@@ -19,7 +19,7 @@ class ProcessWebhookPayloadTests(TestCase):
     @patch("data.handlers.fetch_data")
     @patch("data.handlers.get_endpoint")
     def test_process_update_action(self, mock_get_endpoint, mock_fetch_data, mock_update):
-        
+
         payload = {"type": "entraineur", "action": "update", "id": 10}
 
         mock_get_endpoint.return_value = "https://fake.api/entraineurs/10"

@@ -1,7 +1,8 @@
 from data.models import Joueur, Entraineur, Equipe
 
-def update_or_create_object(data,type_data):
-    
+
+def update_or_create_object(data, type_data):
+
     if type_data == "joueur":
         try:
             joueur = Joueur.objects.get(id_J=data["id_J"])
@@ -35,7 +36,7 @@ def update_or_create_object(data,type_data):
                 nombre_but=data["nombre_but"],
             )
             print("✅ Joueur ajouté dans la base locale")
-    
+
     elif type_data == "entraineur":
         try:
             entraineur = Entraineur.objects.get(id_En=data["id_En"])
@@ -56,9 +57,6 @@ def update_or_create_object(data,type_data):
                 id_En=data["id_En"], nom=data["nom"], experience=data["experience"], nationalite=data["nationalite"]
             )
             print("✅ Entraîneur ajouté dans la base locale")
-
-
-
 
     elif type_data == "equipe":
         entraineur_data = data.get("entraineur")
@@ -83,15 +81,14 @@ def update_or_create_object(data,type_data):
         print("✅ Équipe mise à jour dans la base locale")
 
 
-
 def delete_in_base(id_object, type_data):
 
-        if type_data == "joueur":
-            Joueur.objects.filter(id_J=id_object).delete()
-            print("✅ Joueur supprimé dans la base locale")
-        elif type_data == "entraineur":
-            Entraineur.objects.filter(id_En=id_object).delete()
-            print("✅ Entraineur supprimé dans la base locale")
-        elif type_data == "equipe":
-            Equipe.objects.filter(id_Eq=id_object).delete()
-            print("✅ Equipe supprimé dans la base locale")
+    if type_data == "joueur":
+        Joueur.objects.filter(id_J=id_object).delete()
+        print("✅ Joueur supprimé dans la base locale")
+    elif type_data == "entraineur":
+        Entraineur.objects.filter(id_En=id_object).delete()
+        print("✅ Entraineur supprimé dans la base locale")
+    elif type_data == "equipe":
+        Equipe.objects.filter(id_Eq=id_object).delete()
+        print("✅ Equipe supprimé dans la base locale")

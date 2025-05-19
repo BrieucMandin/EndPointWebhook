@@ -11,4 +11,3 @@ def get_endpoint(type_objet, id_objet):
     }
 
     return endpoint_map.get(type_objet)
-    

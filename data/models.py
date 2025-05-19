@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Joueur(models.Model):
 
     POSTE_CHOICES = [
@@ -22,7 +23,6 @@ class Joueur(models.Model):
     nationalite = models.CharField(max_length=50)
     pied_fort = models.CharField(max_length=1, choices=PIED_FORT_CHOICES, default="D")
     nombre_but = models.IntegerField()
-
 
     def __str__(self):
         return f"{self.nom} ({self.poste})"

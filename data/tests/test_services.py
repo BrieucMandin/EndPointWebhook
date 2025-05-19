@@ -65,7 +65,13 @@ class ServicesTests(TestCase):
     def test_update_or_create_equipe(self):
         entraineur = Entraineur.objects.create(id_En=5, nom="Zidane", experience=12, nationalite="Française")
         joueur1 = Joueur.objects.create(
-            id_J=10, nom="Joueur 1", age=22, poste="Défenseur", nationalite="Portugaise", pied_fort="Gauche", nombre_but=2
+            id_J=10,
+            nom="Joueur 1",
+            age=22,
+            poste="Défenseur",
+            nationalite="Portugaise",
+            pied_fort="Gauche",
+            nombre_but=2,
         )
         joueur2 = Joueur.objects.create(
             id_J=11, nom="Joueur 2", age=24, poste="Milieu", nationalite="Italienne", pied_fort="Droit", nombre_but=5
