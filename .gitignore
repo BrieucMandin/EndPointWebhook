@@ -39,3 +39,6 @@ docker-compose.override.yml
 # VS Code (ou autres éditeurs)
 .vscode/
 .idea/
+
+ci_test.yml
+erreur.txt
