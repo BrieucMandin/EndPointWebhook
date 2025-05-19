@@ -10,16 +10,16 @@ def process_webhook_payload(payload):
     """
     Traite la charge utile (payload) d'un webhook en fonction du type d'action spécifiée.
 
-    Cette fonction prend un dictionnaire contenant les informations d'un webhook, 
+    Cette fonction prend un dictionnaire contenant les informations d'un webhook,
     puis effectue l'action appropriée :
     - Si `action` est `"delete"`, l'objet correspondant est supprimé de la base locale.
-    - Si `action` est `"update"`, les données à jour sont récupérées via une API 
+    - Si `action` est `"update"`, les données à jour sont récupérées via une API
       et l'objet est mis à jour ou créé dans la base locale.
     - Si `action` est inconnue, un message d'information est affiché.
 
     Les informations sont affichées dans la console à des fins de suivi.
 
-    :param dict payload: Dictionnaire contenant les données du webhook. Doit contenir les clés 
+    :param dict payload: Dictionnaire contenant les données du webhook. Doit contenir les clés
                          `"type"` (str), `"action"` (str) et `"id"` (int ou str).
 
     :raises requests.RequestException: En cas d'erreur lors de l'appel à l'API.
