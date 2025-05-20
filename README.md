@@ -18,7 +18,11 @@ Pour accéder au container, il suffit de lancer la commande :
 ```
 docker exec -ti endpoint-app bash
 ```
+Pour accéder à la base : 
 
+```
+docker exec -it webhook-base-postgres psql -U base -d base
+```
 ### Lancement des commandes principales
 
 Pour faire le migrate :
@@ -36,4 +40,4 @@ Pour lancer un runserver, il faut exécuter la commande suivante :
 python manage.py runserver 0.0.0.0:8080
 ```
 
-Il est possible de se connecter au dashboard d'administration django ici : http://127.0.0.1:8000/admin
+Il est possible de se connecter au dashboard d'administration django ici : http://127.0.0.1:8080/admin
